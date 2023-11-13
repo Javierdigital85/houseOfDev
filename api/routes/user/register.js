@@ -5,3 +5,5 @@ const registerRouter = express.Router();
 registerRouter.post("/register", (req, res) => {
   User.create(req.body).then((user) => res.status(201).send(user));
 });
+
+module.exports = registerRouter;
