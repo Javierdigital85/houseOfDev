@@ -6,6 +6,7 @@ const generateToken = (payload) => {
   const token = jwt.sign({ user: payload }, SECRET, { expiresIn: "2d" });
   return token;
 };
+console.log("h");
 //aqui en hacemos la persistencia del token
 const validateToken = () => {};
 
