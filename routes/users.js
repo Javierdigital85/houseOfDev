@@ -23,12 +23,12 @@ userRouter.post("/login", (req, res) => {
         const payload = {
           email: user.email,
           name: user.name,
-          lastname: user.lastname,
+          lastname: user.lastName,
         };
         const token = generateToken(payload);
         res.cookie("token", token);
         res.send(payload);
-        console.log(payload);
+        console.log("usuario logueado", payload);
       }
     });
   });
@@ -36,11 +36,13 @@ userRouter.post("/login", (req, res) => {
 
 userRouter.get("/me", validateAuth, (req, res) => {
   res.send(req.user);
+  console.log(req.user);
 });
 
 userRouter.post("/logout", (req, res) => {
   res.clearCookie("token");
   res.sendStatus(204);
+  console.log("token del usuario borrado");
 });
 
 module.exports = userRouter;
