@@ -11,7 +11,7 @@ userRouter.post("/register", (req, res) => {
     .catch((Error) => console.error(Error));
 });
 
-router.post("/login", (req, res) => {
+userRouter.post("/login", (req, res) => {
   const { email, password } = req.body;
   Users.findOne({
     where: { email },
@@ -28,16 +28,17 @@ router.post("/login", (req, res) => {
         const token = generateToken(payload);
         res.cookie("token", token);
         res.send(payload);
+        console.log(payload);
       }
     });
   });
 });
 
-router.get("/me", validateAuth, (req, res) => {
+userRouter.get("/me", validateAuth, (req, res) => {
   res.send(req.user);
 });
 
-router.post("/logout", (req, res) => {
+userRouter.post("/logout", (req, res) => {
   res.clearCookie("token");
   res.sendStatus(204);
 });
