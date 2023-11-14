@@ -8,9 +8,9 @@ const authAPI = require("./routes");
 
 app.use(express.json());
 app.use(cookieParser());
-
-app.use("/api", authAPI);
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
+app.use("/api", authAPI);
+
 db.sync({ force: false }).then(() => {
   console.log("Db connected");
   app.listen(envs.PORT, () => {
