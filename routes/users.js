@@ -3,6 +3,7 @@ const userRouter = express.Router();
 const Users = require("../models/User");
 const { Error } = require("sequelize");
 const { generateToken } = require("../config/tokens");
+const { validateAuth } = require("../middleware/auth");
 
 userRouter.post("/register", (req, res) => {
   Users.create(req.body)
@@ -30,6 +31,15 @@ router.post("/login", (req, res) => {
       }
     });
   });
+});
+
+router.get("/me", validateAuth, (req, res) => {
+  res.send(req.user);
+});
+
+router.post("/logout", (req, res) => {
+  res.clearCookie("token");
+  res.sendStatus(204);
 });
 
 module.exports = userRouter;
