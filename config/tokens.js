@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 
-const { SECRET } = require("escribimos de donde requerimos SECRET");
+const { SECRET } = require("./envs");
 
 const generateToken = (payload) => {
   const token = jwt.sign({ user: payload }, SECRET, { expiresIn: "2d" });
