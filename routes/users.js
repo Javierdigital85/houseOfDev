@@ -1,6 +1,6 @@
 const express = require("express");
 const userRouter = express.Router();
-const Users = require("../../models/User");
+const Users = require("../models/User");
 const { Error } = require("sequelize");
 
 userRouter.post("/register", (req, res) => {
