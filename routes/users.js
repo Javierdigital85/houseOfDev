@@ -26,6 +26,7 @@ userRouter.post("/login", (req, res) => {
           lastname: user.lastName,
         };
         const token = generateToken(payload);
+        console.log("TOKENNN", token);
         res.cookie("token", token);
         res.send(payload);
         console.log("usuario logueado", payload);
