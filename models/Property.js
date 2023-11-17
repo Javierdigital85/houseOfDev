@@ -25,6 +25,10 @@ Property.init(
       type: S.BOOLEAN,
       allowNull: false,
     },
+    price: {
+      type: S.FLOAT,
+      allowNull: false,
+    },
   },
   { sequelize: db, modelName: "properties" }
 );
