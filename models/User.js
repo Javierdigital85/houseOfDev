@@ -30,12 +30,23 @@ Users.init(
         isEmail: true,
       },
     },
+    phone: {
+      type: S.INTEGER,
+      allowNull: false,
+      validate: {
+        isNumeric: true,
+      },
+    },
     password: {
       type: S.STRING,
       allowNull: false,
     },
     salt: {
       type: S.STRING,
+    },
+    isAdmin: {
+      type: S.BOOLEAN,
+      defaultValue: false,
     },
   },
   {
