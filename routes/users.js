@@ -46,4 +46,33 @@ userRouter.post("/logout", (req, res) => {
   console.log("token del usuario borrado");
 });
 
+//ruta para todos los usuarios
+userRouter.get("/allUsers", (req, res) => {
+  Users.findAll()
+    .then((users) => {
+      res.send(users);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({ error: "Error al obtener todos los usuarios" });
+    });
+});
+
+//ruta informacion de un usuario
+userRouter.get("/:id", (req, res) => {
+  const userId = req.params.id;
+  Users.findByPk(userId)
+    .then((user) => {
+      if (user) {
+        res.send(user);
+      } else {
+        res.status(404);
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({ error: "Error al obtener datos de un usuario" });
+    });
+});
+
 module.exports = userRouter;
