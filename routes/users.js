@@ -46,7 +46,7 @@ userRouter.post("/logout", (req, res) => {
   console.log("token del usuario borrado");
 });
 
-//ruta para todos los usuarios
+//ruta informacion de todos los usuarios
 userRouter.get("/allUsers", (req, res) => {
   Users.findAll()
     .then((users) => {

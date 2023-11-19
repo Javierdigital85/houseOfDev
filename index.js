@@ -3,6 +3,7 @@ const app = express();
 const cookieParser = require("cookie-parser");
 const db = require("./db");
 const envs = require("./config/envs");
+const property = require("./config/property");
 const cors = require("cors");
 const authAPI = require("./routes");
 
