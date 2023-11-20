@@ -10,7 +10,7 @@ propertyRouter.post("/register", (req, res) => {
 });
 
 //ruta informacion de todos los usuarios
-propertyRouter.get("/allProperties", (req, res) => {
+propertyRouter.get("/allRentProperties", (req, res) => {
   Property.findAll()
     .then((property) => {
       res.send(property);
