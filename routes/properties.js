@@ -9,7 +9,7 @@ propertyRouter.post("/register", (req, res) => {
     .catch((Error) => console.error(Error));
 });
 
-//ruta informacion de todos los usuarios
+//ruta informacion de todos las propiedades
 propertyRouter.get("/allRentProperties", (req, res) => {
   Property.findAll()
     .then((property) => {
@@ -17,7 +17,7 @@ propertyRouter.get("/allRentProperties", (req, res) => {
     })
     .catch((error) => {
       console.error(error);
-      res.status(500).json({ error: "Error al obtener todos los usuarios" });
+      res.status(500).json({ error: "Error al obtener todos las propiedades" });
     });
 });
 
