@@ -1,10 +1,20 @@
 const Sequelize = require("sequelize");
 const config = require("../config/envs");
+const configProperty = require("../config/property");
 
-const sequelize = new Sequelize(config.DB_HOST, null, null, {
+const userDb = new Sequelize(config.DB_HOST, null, null, {
   host: "localhost",
   dialect: "postgres",
   logging: false,
 });
 
-module.exports = sequelize;
+const propertyDb = new Sequelize(config.PROPERTY_DB_HOST, null, null, {
+  host: "localhost",
+  dialect: "postgres",
+  logging: false,
+});
+
+module.exports = {
+  userDb,
+  propertyDb,
+};
