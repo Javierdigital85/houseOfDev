@@ -15,7 +15,27 @@ propertyRouter.get("/alquiler", (req, res) => {
     where: { onSale: false },
   })
     .then((property) => {
-      console.log(property);
+      console.log(
+        "PROPIEDADES:::::::::::::::::::::::::::::::::::::::::::::::::",
+        property
+      );
+      res.send(property);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({ error: "Error al obtener todos las propiedades" });
+    });
+});
+
+propertyRouter.get("/comprar", (req, res) => {
+  Property.findAll({
+    where: { onSale: true },
+  })
+    .then((property) => {
+      console.log(
+        "PROPIEDADES:::::::::::::::::::::::::::::::::::::::::::::::::",
+        property
+      );
       res.send(property);
     })
     .catch((error) => {
