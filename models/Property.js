@@ -1,5 +1,5 @@
 const S = require("sequelize");
-const { propertyDb } = require("../db");
+const db = require("../db");
 
 class Property extends S.Model {}
 
@@ -30,7 +30,7 @@ Property.init(
       allowNull: false,
     },
   },
-  { sequelize: propertyDb, modelName: "properties" }
+  { sequelize: db, modelName: "properties" }
 );
 
 module.exports = Property;
