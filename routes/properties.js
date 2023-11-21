@@ -10,9 +10,12 @@ propertyRouter.post("/register", (req, res) => {
 });
 
 //ruta informacion de todos las propiedades
-propertyRouter.get("/allRentProperties", (req, res) => {
-  Property.findAll()
+propertyRouter.get("/alquiler", (req, res) => {
+  Property.findAll({
+    where: { onSale: false },
+  })
     .then((property) => {
+      console.log(property);
       res.send(property);
     })
     .catch((error) => {

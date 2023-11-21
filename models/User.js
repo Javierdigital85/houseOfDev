@@ -1,5 +1,5 @@
 const S = require("sequelize");
-const { userDb } = require("../db");
+const db = require("../db");
 const bcrypt = require("bcrypt");
 
 class Users extends S.Model {
@@ -50,7 +50,7 @@ Users.init(
     },
   },
   {
-    sequelize: userDb,
+    sequelize: db,
     modelName: "user",
   }
 );
