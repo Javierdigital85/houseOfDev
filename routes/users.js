@@ -58,6 +58,12 @@ userRouter.get("/allUsers", (req, res) => {
     });
 });
 
+//perfil del usuario logeado
+
+userRouter.get("/profile", (req, res) => {
+  Users.findOne();
+});
+
 //ruta informacion de un usuario
 userRouter.get("/:id", (req, res) => {
   const userId = req.params.id;
