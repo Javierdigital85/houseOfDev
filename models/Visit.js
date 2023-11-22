@@ -19,7 +19,4 @@ Visits.init(
   { sequelize: db, modelName: "visit" }
 );
 
-Visits.belongsTo(User, { as: "prospect" });
-Visits.belongsTo(Property, { as: "property" });
-
 module.exports = Visits;
