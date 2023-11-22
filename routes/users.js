@@ -61,7 +61,11 @@ userRouter.get("/allUsers", (req, res) => {
 //perfil del usuario logeado
 
 userRouter.get("/profile", (req, res) => {
-  Users.findOne();
+  Users.findOne({
+    where: { email },
+  })
+    .then((user) => res.status(200).send(user))
+    .catch((Error) => console.error(Error));
 });
 
 //ruta informacion de un usuario
