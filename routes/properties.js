@@ -9,6 +9,12 @@ propertyRouter.post("/register", (req, res) => {
     .catch((Error) => console.error(Error));
 });
 
+propertyRouter.get("/", (req, res) => {
+  Property.findAll()
+    .then((properties) => res.status(200).send(properties))
+    .catch((error) => console.log(error));
+});
+
 //ruta informacion de todos las propiedades
 propertyRouter.get("/alquiler", (req, res) => {
   Property.findAll({
