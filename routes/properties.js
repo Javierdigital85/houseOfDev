@@ -21,11 +21,7 @@ propertyRouter.get("/alquiler", (req, res) => {
     where: { onSale: false },
   })
     .then((property) => {
-      console.log(
-        "PROPIEDADES:::::::::::::::::::::::::::::::::::::::::::::::::",
-        property
-      );
-      res.send(property);
+      res.status(200).send(property);
     })
     .catch((error) => {
       console.error(error);
@@ -38,16 +34,19 @@ propertyRouter.get("/comprar", (req, res) => {
     where: { onSale: true },
   })
     .then((property) => {
-      console.log(
-        "PROPIEDADES:::::::::::::::::::::::::::::::::::::::::::::::::",
-        property
-      );
       res.send(property);
     })
     .catch((error) => {
       console.error(error);
       res.status(500).json({ error: "Error al obtener todos las propiedades" });
     });
+});
+
+propertyRouter.get("/:id", (req, res) => {
+  const { id } = req.params;
+  Property.findOne({ where: { id: req.params.id } }).then((property) =>
+    res.status(200).send(property)
+  );
 });
 
 module.exports = propertyRouter;
