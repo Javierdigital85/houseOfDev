@@ -61,6 +61,7 @@ userRouter.get("/allUsers", (req, res) => {
 //perfil del usuario logeado
 
 userRouter.get("/profile", (req, res) => {
+  const { email } = req.query;
   Users.findOne({
     where: { email },
   })
