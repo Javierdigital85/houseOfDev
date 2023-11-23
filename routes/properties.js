@@ -44,9 +44,10 @@ propertyRouter.get("/comprar", (req, res) => {
 
 propertyRouter.get("/:id", (req, res) => {
   const { id } = req.params;
-  Property.findOne({ where: { id: req.params.id } }).then((property) =>
-    res.status(200).send(property)
-  );
+  Property.findOne({ where: { id: req.params.id } }).then((property) => {
+    console.log("+++++++++++++++++++++++++++++PROPERTY+++++++++", property);
+    res.status(200).send(property);
+  });
 });
 
 module.exports = propertyRouter;
