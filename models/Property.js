@@ -29,6 +29,9 @@ Property.init(
       type: S.FLOAT,
       allowNull: false,
     },
+    img: {
+      type: S.STRING,
+    },
   },
   { sequelize: db, modelName: "properties" }
 );
