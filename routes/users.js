@@ -35,6 +35,44 @@ userRouter.post("/login", (req, res) => {
   });
 });
 
+userRouter.get("/passwordValidate", (req, res) => {
+  console.log(req.body);
+  const { email, password } = req.body;
+  Users.findOne({
+    where: { email },
+  }).then((user) => {
+    if (!user) return res.sendStatus(401);
+    user.validatePassword(password).then((isValid) => {
+      if (!isValid) return res.sendStatus(401);
+      else {
+        res.status(200).send(true);
+      }
+    });
+  });
+});
+
+userRouter.put("/update", (req, res) => {
+  const { name, lastName, phone, email, password } = req.body;
+  console.log("************************ REQ BODY ******************", req.body);
+  const { userEmail } = req.query;
+  console.log("USER EMAAAAAAILLLLLL }}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}");
+  Users.update(
+    {
+      name,
+      lastName,
+      phone,
+      email,
+      password,
+    },
+    { where: { email: userEmail }, returning: true, plain: true }
+  )
+    .then(([rows, user]) => {
+      console.log(user);
+      res.status(201).send(user);
+    })
+    .catch((Error) => console.error(Error));
+});
+
 userRouter.get("/me", validateAuth, (req, res) => {
   res.send(req.user);
   console.log(req.user);
