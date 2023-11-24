@@ -13,7 +13,7 @@ Property.init(
       type: S.STRING,
       allowNull: false,
     },
-    adress: {
+    address: {
       type: S.STRING,
       allowNull: false,
     },
