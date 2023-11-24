@@ -32,6 +32,15 @@ Property.init(
     img: {
       type: S.STRING,
     },
+    squareMeters: {
+      type: S.INTEGER,
+    },
+    bathrooms: {
+      type: S.INTEGER,
+    },
+    bedrooms: {
+      type: S.INTEGER,
+    },
   },
   { sequelize: db, modelName: "properties" }
 );
