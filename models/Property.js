@@ -23,7 +23,7 @@ Property.init(
     },
     onSale: {
       type: S.BOOLEAN,
-      allowNull: false,
+      defaultValue: false,
     },
     price: {
       type: S.FLOAT,
