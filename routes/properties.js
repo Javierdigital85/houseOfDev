@@ -32,12 +32,14 @@ propertyRouter.post("/register", (req, res) => {
 //ruta informacion de todos las propiedades
 propertyRouter.get("/alquiler", (req, res) => {
   const { ubicacion } = req.query;
+
   console.log("xxxxxxxxxx", req.query);
   if (ubicacion) {
     Property.findAll({
       where: {
         city: ubicacion,
       },
+
     })
       .then((properties) => res.status(200).send(properties))
       .catch((error) => console.log(error));
