@@ -31,7 +31,7 @@ Users.init(
       },
     },
     phone: {
-      type: S.INTEGER,
+      type: S.STRING,
       allowNull: false,
       validate: {
         isNumeric: true,
@@ -55,7 +55,7 @@ Users.init(
   }
 );
 
-Users.beforeCreate((user) => {
+Users.beforeSave((user) => {
   const salt = bcrypt.genSaltSync(8);
   user.salt = salt;
   return user

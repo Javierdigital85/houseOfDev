@@ -17,6 +17,10 @@ propertyRouter.get("/", (req, res) => {
 
 //ruta informacion de todos las propiedades
 propertyRouter.get("/alquiler", (req, res) => {
+  const { ubicacion } = req.query;
+  if (ubicacion) {
+    console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX", ubicacion);
+  }
   Property.findAll({
     where: { onSale: false },
   })
