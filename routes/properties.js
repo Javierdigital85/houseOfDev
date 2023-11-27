@@ -9,24 +9,52 @@ propertyRouter.post("/register", (req, res) => {
     .catch((Error) => console.error(Error));
 });
 
-propertyRouter.get("/", (req, res) => {
-  Property.findAll()
-    .then((properties) => res.status(200).send(properties))
-    .catch((error) => console.log(error));
-});
+// propertyRouter.get("/", (req, res) => {
+//   const { ubicacion } = req.query;
+//   console.log("xxxxxxxxxx", ubicacion);
+//   if (ubicacion) {
+//     Property.findAll({
+//       where: {
+//         city: ubicacion,
+//       },
+//     })
+//       .then((properties) => res.status(200).send(properties))
+//       .catch((error) => console.log(error));
+//   }
+//   //query
+//   else {
+//     Property.findAll()
+//       .then((properties) => res.status(200).send(properties))
+//       .catch((error) => console.log(error));
+//   }
+// });
 
 //ruta informacion de todos las propiedades
 propertyRouter.get("/alquiler", (req, res) => {
-  Property.findAll({
-    where: { onSale: false },
-  })
-    .then((property) => {
-      res.status(200).send(property);
+  const { ubicacion } = req.query;
+  console.log("xxxxxxxxxx", req.query);
+  if (ubicacion) {
+    Property.findAll({
+      where: {
+        city: ubicacion,
+      },
     })
-    .catch((error) => {
-      console.error(error);
-      res.status(500).json({ error: "Error al obtener todos las propiedades" });
-    });
+      .then((properties) => res.status(200).send(properties))
+      .catch((error) => console.log(error));
+  } else {
+    Property.findAll({
+      where: { onSale: false },
+    })
+      .then((property) => {
+        res.status(200).send(property);
+      })
+      .catch((error) => {
+        console.error(error);
+        res
+          .status(500)
+          .json({ error: "Error al obtener todos las propiedades" });
+      });
+  }
 });
 
 propertyRouter.get("/comprar", (req, res) => {
