@@ -33,15 +33,18 @@ propertyRouter.post("/register", (req, res) => {
 propertyRouter.get("/alquiler", (req, res) => {
   const { ubicacion } = req.query;
   console.log("xxxxxxxxxx", req.query);
-  if (ubicacion) {
+  console.log("ubicacionnnnn", ubicacion);
+  if (ubicacion !== "") {
+    console.log(ubicacion, "trueeeeeeeeee");
     Property.findAll({
       where: {
-        city: ubicacion,
+        province: ubicacion,
       },
     })
       .then((properties) => res.status(200).send(properties))
       .catch((error) => console.log(error));
   } else {
+    console.log(ubicacion, "falseeeeee");
     Property.findAll({
       where: { onSale: false },
     })
