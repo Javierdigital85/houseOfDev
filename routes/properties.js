@@ -34,21 +34,18 @@ propertyRouter.get("/alquiler", (req, res) => {
   const { ubicacion } = req.query;
   console.log("xxxxxxxxxx", req.query);
   console.log("ubicacionnnnn", ubicacion);
-  if (ubicacion !== "") {
+  if (ubicacion === "all") {
     console.log(ubicacion, "trueeeeeeeeee");
-    Property.findAll({
-      where: {
-        province: ubicacion,
-      },
-    })
+    Property.findAll()
       .then((properties) => res.status(200).send(properties))
       .catch((error) => console.log(error));
   } else {
     console.log(ubicacion, "falseeeeee");
     Property.findAll({
-      where: { onSale: false },
+      where: { onSale: false, province: ubicacion },
     })
       .then((property) => {
+        console.log("xxxxxxxxxxxxxxxxxxxxxxx", property);
         res.status(200).send(property);
       })
       .catch((error) => {
@@ -61,16 +58,25 @@ propertyRouter.get("/alquiler", (req, res) => {
 });
 
 propertyRouter.get("/comprar", (req, res) => {
-  Property.findAll({
-    where: { onSale: true },
-  })
-    .then((property) => {
-      res.send(property);
+  const { ubicacion } = req.query;
+  if (ubicacion === "all") {
+    Property.findAll()
+      .then((properties) => res.status(200).send(properties))
+      .catch((error) => console.log(error));
+  } else {
+    Property.findAll({
+      where: { onSale: true, province: ubicacion },
     })
-    .catch((error) => {
-      console.error(error);
-      res.status(500).json({ error: "Error al obtener todos las propiedades" });
-    });
+      .then((property) => {
+        res.send(property);
+      })
+      .catch((error) => {
+        console.error(error);
+        res
+          .status(500)
+          .json({ error: "Error al obtener todos las propiedades" });
+      });
+  }
 });
 
 propertyRouter.get("/:id", (req, res) => {
