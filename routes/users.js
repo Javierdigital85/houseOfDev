@@ -36,10 +36,9 @@ userRouter.post("/login", (req, res) => {
 });
 
 userRouter.get("/passwordValidate", (req, res) => {
-  console.log(req.body);
-  const { email, password } = req.body;
+  const { password, email } = req.query;
   Users.findOne({
-    where: { email },
+    where: { email: email },
   }).then((user) => {
     if (!user) return res.sendStatus(401);
     user.validatePassword(password).then((isValid) => {
@@ -53,9 +52,9 @@ userRouter.get("/passwordValidate", (req, res) => {
 
 userRouter.put("/update", (req, res) => {
   const { name, lastName, phone, email, password } = req.body;
-  console.log("************************ REQ BODY ******************", req.body);
+
   const { userEmail } = req.query;
-  console.log("USER EMAAAAAAILLLLLL }}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}");
+
   Users.update(
     {
       name,
@@ -101,7 +100,7 @@ userRouter.get("/allUsers", (req, res) => {
 userRouter.get("/profile", (req, res) => {
   const { email } = req.query;
   Users.findOne({
-    where: { email },
+    where: { email: req.query.email },
   })
     .then((user) => res.status(200).send(user))
     .catch((Error) => console.error(Error));
