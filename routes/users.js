@@ -37,7 +37,6 @@ userRouter.post("/login", (req, res) => {
 
 userRouter.get("/passwordValidate", (req, res) => {
   const { password, email } = req.query;
-
   Users.findOne({
     where: { email: email },
   }).then((user) => {
@@ -53,9 +52,9 @@ userRouter.get("/passwordValidate", (req, res) => {
 
 userRouter.put("/update", (req, res) => {
   const { name, lastName, phone, email, password } = req.body;
-  console.log("************************ REQ BODY ******************", req.body);
+
   const { userEmail } = req.query;
-  console.log("USER EMAAAAAAILLLLLL }}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}");
+
   Users.update(
     {
       name,
