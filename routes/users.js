@@ -50,8 +50,10 @@ userRouter.get("/passwordValidate", (req, res) => {
   });
 });
 
+//actualizacion de datos de usuario
+
 userRouter.put("/update", (req, res) => {
-  const { name, lastName, phone, email, password } = req.body;
+  const { name, lastName, phone } = req.body;
 
   const { userEmail } = req.query;
 
@@ -60,7 +62,25 @@ userRouter.put("/update", (req, res) => {
       name,
       lastName,
       phone,
-      email,
+    },
+    { where: { email: userEmail }, returning: true, plain: true }
+  )
+    .then(([rows, user]) => {
+      console.log(user);
+      res.status(201).send(user);
+    })
+    .catch((Error) => console.error(Error));
+});
+
+//actualizacion de password
+
+userRouter.put("/updatePass", (req, res) => {
+  const { password } = req.body;
+
+  const { userEmail } = req.query;
+
+  Users.update(
+    {
       password,
     },
     { where: { email: userEmail }, returning: true, plain: true }
