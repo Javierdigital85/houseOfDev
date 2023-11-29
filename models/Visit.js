@@ -7,13 +7,10 @@ class Visits extends S.Model {}
 
 Visits.init(
   {
-    date: {
+    dateTime: {
       type: S.DATE,
       allowNull: false,
-    },
-    time: {
-      type: S.TIME,
-      allowNull: false,
+      unique: true,
     },
   },
   { sequelize: db, modelName: "visit" }
