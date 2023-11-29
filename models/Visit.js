@@ -10,7 +10,6 @@ Visits.init(
     dateTime: {
       type: S.DATE,
       allowNull: false,
-      unique: true,
     },
   },
   { sequelize: db, modelName: "visit" }

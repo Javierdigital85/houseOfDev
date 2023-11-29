@@ -5,13 +5,24 @@ const Visits = require("../models/Visit");
 
 //Registramos las citas
 visitRouter.post("/register", (req, res) => {
-  Visits.create(req.body)
-    .then((visit) => {
-      res.status(201).send(visit);
+  const { propertyId, dateTime } = req.body;
+  Visits.findOne({
+    where: {
+      propertyId,
+      dateTime,
+    },
+  })
+    .then((data) => {
+      if (data) throw new Error("OCUPADO");
+      else {
+        Visits.create(req.body).then((visit) => {
+          res.status(201).send(visit);
+        });
+      }
     })
-    .catch((error) => {
-      console.error(error);
-      res.status(500).json({ error: "Error al hacer la cita" });
+    .catch((Error) => {
+      console.error(Error);
+      res.status(404).json({ Error: Error || "Error al hacer la cita" });
     });
 });
 

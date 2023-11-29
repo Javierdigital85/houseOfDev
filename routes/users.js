@@ -21,6 +21,7 @@ userRouter.post("/login", (req, res) => {
       if (!isValid) return res.sendStatus(401);
       else {
         const payload = {
+          id: user.id,
           email: user.email,
           name: user.name,
           lastname: user.lastName,
