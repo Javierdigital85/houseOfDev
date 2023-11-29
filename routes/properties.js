@@ -9,6 +9,33 @@ propertyRouter.post("/register", (req, res) => {
     .catch((Error) => console.error(Error));
 });
 
+propertyRouter.get("/all", (req, res) => {
+  Property.findAll().then((property) => {
+    res.send(property);
+  });
+});
+
+propertyRouter.delete("/admin", (req, res) => {
+  console.log("iddddddddddddddd", id);
+  Property.destroy({
+    where: {
+      id: req.params.id,
+    },
+  }).then(() => {
+    res.sendStatus(202);
+  });
+});
+
+// librosRouter.delete("/libroBorrado/:id", (req, res) => {
+//   Libros.destroy({
+//     where: {
+//       id: req.params.id,
+//     },
+//   }).then(() => {
+//     res.sendStatus(202);
+//   });
+// });
+
 // propertyRouter.get("/", (req, res) => {
 //   const { ubicacion } = req.query;
 //   console.log("xxxxxxxxxx", ubicacion);
