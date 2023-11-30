@@ -63,8 +63,10 @@ propertyRouter.get("/alquiler", (req, res) => {
   console.log("xxxxxxxxxx", req.query);
   console.log("ubicacionnnnn", ubicacion);
   if (ubicacion === "all") {
-    console.log(ubicacion, "trueeeeeeeeee");
-    Property.findAll()
+    console.log(ubicacion, "falseeeeeeeeee");
+    Property.findAll({
+      where: { onSale: false },
+    })
       .then((properties) => res.status(200).send(properties))
       .catch((error) => console.log(error));
   } else {
@@ -88,7 +90,10 @@ propertyRouter.get("/alquiler", (req, res) => {
 propertyRouter.get("/comprar", (req, res) => {
   const { ubicacion } = req.query;
   if (ubicacion === "all") {
-    Property.findAll()
+    console.log(ubicacion, "trueeeeeeeeeeeeeeeeee");
+    Property.findAll({
+      where: { onSale: true },
+    })
       .then((properties) => res.status(200).send(properties))
       .catch((error) => console.log(error));
   } else {
