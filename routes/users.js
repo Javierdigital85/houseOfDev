@@ -24,7 +24,7 @@ userRouter.post("/login", (req, res) => {
           id: user.id,
           email: user.email,
           name: user.name,
-          lastname: user.lastName,
+          lastName: user.lastName,
           isAdmin: user.isAdmin,
         };
         const token = generateToken(payload);
