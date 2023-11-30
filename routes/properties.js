@@ -15,8 +15,8 @@ propertyRouter.get("/all", (req, res) => {
   });
 });
 
-propertyRouter.delete("/admin", (req, res) => {
-  console.log("iddddddddddddddd", id);
+propertyRouter.delete("/admin/:id", (req, res) => {
+  console.log("iddddddddddddddd", req.params.id);
   Property.destroy({
     where: {
       id: req.params.id,
