@@ -28,7 +28,7 @@ visitRouter.post("/register", (req, res) => {
 
 //ruta informacion de esa citas
 
-visitRouter.get("/citas", (req, res) => {
+visitRouter.get("/", (req, res) => {
   Visits.findAll()
     .then((visit) => {
       res.send(visit);
