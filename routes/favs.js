@@ -7,8 +7,6 @@ favsRouter.get("/", (req, res) => {
 });
 
 favsRouter.post("/register", (req, res) => {
-  if (!req.body.prospectId)
-    res.status(401).send("necesitas estar loggeado para agregar a favoritos");
   const { prospectId, propertyId } = req.body;
   Favs.findOrCreate({
     where: { prospectId, propertyId },
