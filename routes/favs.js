@@ -7,9 +7,18 @@ favsRouter.get("/", (req, res) => {
 });
 
 favsRouter.post("/register", (req, res) => {
-  Favs.create(req.body)
-    .then((newFav) => res.status(201).send(newFav))
-    .catch((error) => console.log("Ha ocurrido un error: ", error));
+  if (!req.body.prospectId)
+    res.status(401).send("necesitas estar loggeado para agregar a favoritos");
+  const { prospectId, propertyId } = req.body;
+  Favs.findOrCreate({
+    where: { prospectId, propertyId },
+    defaults: { prospectId, propertyId },
+  })
+    .then(([user, created]) => {
+      if (created) res.status(201).send(created);
+      res.status(200).send(created);
+    })
+    .catch((err) => console.error(err));
 });
 
 module.exports = favsRouter;
