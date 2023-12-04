@@ -26,42 +26,9 @@ propertyRouter.delete("/admin/:id", (req, res) => {
   });
 });
 
-// librosRouter.delete("/libroBorrado/:id", (req, res) => {
-//   Libros.destroy({
-//     where: {
-//       id: req.params.id,
-//     },
-//   }).then(() => {
-//     res.sendStatus(202);
-//   });
-// });
-
-// propertyRouter.get("/", (req, res) => {
-//   const { ubicacion } = req.query;
-//   console.log("xxxxxxxxxx", ubicacion);
-//   if (ubicacion) {
-//     Property.findAll({
-//       where: {
-//         city: ubicacion,
-//       },
-//     })
-//       .then((properties) => res.status(200).send(properties))
-//       .catch((error) => console.log(error));
-//   }
-//   //query
-//   else {
-//     Property.findAll()
-//       .then((properties) => res.status(200).send(properties))
-//       .catch((error) => console.log(error));
-//   }
-// });
-
 //ruta informacion de todos las propiedades
 propertyRouter.get("/alquiler", (req, res) => {
   const { ubicacion } = req.query;
-
-  console.log("xxxxxxxxxx", req.query);
-  console.log("ubicacionnnnn", ubicacion);
   if (ubicacion === "all") {
     console.log(ubicacion, "falseeeeeeeeee");
     Property.findAll({
@@ -70,12 +37,10 @@ propertyRouter.get("/alquiler", (req, res) => {
       .then((properties) => res.status(200).send(properties))
       .catch((error) => console.log(error));
   } else {
-    console.log(ubicacion, "falseeeeee");
     Property.findAll({
       where: { onSale: false, province: ubicacion },
     })
       .then((property) => {
-        console.log("xxxxxxxxxxxxxxxxxxxxxxx", property);
         res.status(200).send(property);
       })
       .catch((error) => {
@@ -90,7 +55,6 @@ propertyRouter.get("/alquiler", (req, res) => {
 propertyRouter.get("/comprar", (req, res) => {
   const { ubicacion } = req.query;
   if (ubicacion === "all") {
-    console.log(ubicacion, "trueeeeeeeeeeeeeeeeee");
     Property.findAll({
       where: { onSale: true },
     })
@@ -114,10 +78,9 @@ propertyRouter.get("/comprar", (req, res) => {
 
 propertyRouter.get("/:id", (req, res) => {
   const { id } = req.params;
-  Property.findOne({ where: { id: req.params.id } }).then((property) => {
-    console.log("+++++++++++++++++++++++++++++PROPERTY+++++++++", property);
-    res.status(200).send(property);
-  });
+  Property.findOne({ where: { id: req.params.id } }).then((property) =>
+    res.status(200).send(property)
+  );
 });
 
 module.exports = propertyRouter;

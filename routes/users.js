@@ -68,7 +68,6 @@ userRouter.put("/update", (req, res) => {
     { where: { email: userEmail }, returning: true, plain: true }
   )
     .then(([rows, user]) => {
-      console.log(user);
       res.status(201).send(user);
     })
     .catch((Error) => console.error(Error));
@@ -88,7 +87,6 @@ userRouter.put("/updatePass", (req, res) => {
     { where: { email: userEmail }, returning: true, plain: true }
   )
     .then(([rows, user]) => {
-      console.log(user);
       res.status(201).send(user);
     })
     .catch((Error) => console.error(Error));
@@ -96,7 +94,6 @@ userRouter.put("/updatePass", (req, res) => {
 
 userRouter.get("/me", validateAuth, (req, res) => {
   res.send(req.user);
-  console.log(req.user);
 });
 
 userRouter.post("/logout", (req, res) => {
