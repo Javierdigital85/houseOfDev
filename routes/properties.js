@@ -90,4 +90,12 @@ propertyRouter.get("/", (req, res) => {
   // }).then((result) => console.log(result));
 });
 
+propertyRouter.put("/update/:id", (req, res) => {
+  Property.update(req.body, { where: { id: req.params.id }, returning: true })
+    .then(([rows, propiedades]) => {
+      res.send(propiedades[0]);
+    })
+    .catch((error) => console.log("no se pudo editar"));
+});
+
 module.exports = propertyRouter;
