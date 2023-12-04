@@ -33,13 +33,13 @@ Property.init(
       type: S.STRING,
     },
     squareMeters: {
-      type: S.INTEGER,
+      type: S.STRING,
     },
     bathrooms: {
-      type: S.INTEGER,
+      type: S.STRING,
     },
     bedrooms: {
-      type: S.INTEGER,
+      type: S.STRING,
     },
   },
   { sequelize: db, modelName: "properties" }

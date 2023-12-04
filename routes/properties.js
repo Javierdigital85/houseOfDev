@@ -16,7 +16,6 @@ propertyRouter.get("/all", (req, res) => {
 });
 
 propertyRouter.delete("/admin/:id", (req, res) => {
-  console.log("iddddddddddddddd", req.params.id);
   Property.destroy({
     where: {
       id: req.params.id,
@@ -81,6 +80,14 @@ propertyRouter.get("/:id", (req, res) => {
   Property.findOne({ where: { id: req.params.id } }).then((property) =>
     res.status(200).send(property)
   );
+});
+
+propertyRouter.get("/", (req, res) => {
+  const searchQuery = Object.keys(req.query);
+  console.log("SEARCH QUERY TE DIJE", searchQuery);
+  // Property.findAll({
+  //   where: { searchQuery },
+  // }).then((result) => console.log(result));
 });
 
 module.exports = propertyRouter;
