@@ -26,7 +26,7 @@ Property.init(
       defaultValue: false,
     },
     price: {
-      type: S.FLOAT,
+      type: S.STRING,
       allowNull: false,
     },
     img: {
