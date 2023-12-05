@@ -8,4 +8,4 @@ Visit.belongsTo(Property, { as: "property" });
 Favs.belongsTo(User, { as: "prospect" });
 Favs.belongsTo(Property, { as: "property" });
 
-module.exports = { User, Property, Visit };
+module.exports = { User, Property, Visit, Favs };
