@@ -83,11 +83,11 @@ propertyRouter.get("/:id", (req, res) => {
 });
 
 propertyRouter.get("/", (req, res) => {
-  const searchQuery = Object.keys(req.query);
-  console.log("SEARCH QUERY TE DIJE", searchQuery);
-  // Property.findAll({
-  //   where: { searchQuery },
-  // }).then((result) => console.log(result));
+  const searchQuery = req.query;
+  console.log("SEARCH QUERY TE DIJE", req.query);
+  Property.findAll({
+    where: searchQuery,
+  }).then((result) => res.status(200).send(result));
 });
 
 propertyRouter.put("/update/:id", (req, res) => {

@@ -13,7 +13,7 @@ favsRouter.post("/register", (req, res) => {
     defaults: { prospectId, propertyId },
   })
     .then(([user, created]) => {
-      if (created) res.status(201).send(created);
+      if (created) return res.status(201).send(created);
       res.status(200).send(created);
     })
     .catch((err) => console.error(err));
