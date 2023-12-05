@@ -8,7 +8,7 @@ class Visits extends S.Model {}
 Visits.init(
   {
     dateTime: {
-      type: S.DATE,
+      type: S.STRING,
       allowNull: false,
     },
   },
