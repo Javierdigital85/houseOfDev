@@ -1,10 +1,40 @@
 const express = require("express");
+const multer = require("multer");
+const cloudinary = require("../config/cloudinary");
 const propertyRouter = express.Router();
 const Property = require("../models/Property");
 const { Error } = require("sequelize");
 
-propertyRouter.post("/register", (req, res) => {
-  Property.create(req.body)
+const storage = multer.diskStorage({});
+
+const upload = multer({ storage: storage }).single("image");
+
+propertyRouter.post("/register", upload, (req, res) => {
+  const result = () => cloudinary.uploader.upload(req.file.path);
+  console.log(result);
+  const {
+    province,
+    city,
+    address,
+    number,
+    onSale,
+    price,
+    squareMeters,
+    bedrooms,
+    bathrooms,
+  } = req.body;
+  Property.create({
+    province,
+    city,
+    address,
+    number,
+    onSale,
+    price,
+    squareMeters,
+    bedrooms,
+    bathrooms,
+    img: result.secure_url,
+  })
     .then((property) => res.status(201).send(property))
     .catch((Error) => console.error(Error));
 });
