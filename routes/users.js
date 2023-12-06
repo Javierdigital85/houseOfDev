@@ -26,6 +26,7 @@ userRouter.post("/login", (req, res) => {
           name: user.name,
           lastName: user.lastName,
           isAdmin: user.isAdmin,
+          superAdmin: user.superAdmin,
         };
         const token = generateToken(payload);
         console.log("TOKENNN", token);
@@ -140,6 +141,17 @@ userRouter.get("/:id", (req, res) => {
       console.error(error);
       res.status(500).json({ error: "Error al obtener datos de un usuario" });
     });
+});
+
+userRouter.put("/adminupdate/:id", (req, res) => {
+  const { isAdmin } = req.body;
+
+  console.log(req, "xxxxxxxxxxxxxxxxx");
+  Users.update({ isAdmin }, { where: { id: req.params.id }, returning: true })
+    .then(([rows, usuarios]) => {
+      res.send(usuarios);
+    })
+    .catch((error) => console.log("no se pudo editar"));
 });
 
 module.exports = userRouter;
