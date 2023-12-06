@@ -68,12 +68,10 @@ Users.beforeCreate((user) => {
 });
 
 Users.beforeUpdate((user) => {
-  console.log("USER DE BEFORE UPDATE PAAAAA ''''''''' ", user);
   const salt = bcrypt.genSaltSync(8);
   user.salt = salt;
   return user.hash(user.password, salt).then((hash) => {
     user.password = hash;
-    console.log("ESTE SERIA EL HASH", hash);
   });
 });
 
