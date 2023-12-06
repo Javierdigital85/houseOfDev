@@ -8,10 +8,10 @@ const Visits = require("../models/Visit");
 const confirmDate = (email) => {
   transporter
     .sendMail({
-      from: `VISITA CONFIRMADA <houseofdev23@gmail.com>`,
+      from: `HOUSE OF DEV <houseofdev23@gmail.com>`,
       to: email,
       subject: "VISITA CONFIRMADA",
-      text: "PRUEBA",
+      text: "SU VISITA HA SIDO AGENDAD CON ÉXITO",
     })
     .then(() => console.log("Mensaje enviado"))
     .catch((err) => console.error(err));
