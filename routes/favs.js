@@ -25,7 +25,6 @@ favsRouter.get("/", (req, res) => {
       const promesas = arrayId.map((id) => {
         return Property.findByPk(id);
       });
-      console.log(promesas);
       return promesas;
     })
     .then((promesas) => {
