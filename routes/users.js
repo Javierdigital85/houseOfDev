@@ -26,12 +26,12 @@ userRouter.post("/login", (req, res) => {
           name: user.name,
           lastName: user.lastName,
           isAdmin: user.isAdmin,
+          superAdmin: user.superAdmin,
         };
         const token = generateToken(payload);
-        console.log("TOKENNN", token);
+
         res.cookie("token", token);
         res.send(payload);
-        console.log("usuario logueado", payload);
       }
     });
   });
@@ -84,7 +84,7 @@ userRouter.put("/updatePass", (req, res) => {
     {
       password,
     },
-    { where: { email: userEmail }, returning: true, plain: true }
+    { where: { email: userEmail }, returning: true, individualHooks: true }
   )
     .then(([rows, user]) => {
       res.status(201).send(user);
