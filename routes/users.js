@@ -142,4 +142,15 @@ userRouter.get("/:id", (req, res) => {
     });
 });
 
+userRouter.put("/adminupdate/:id", (req, res) => {
+  const { isAdmin } = req.body;
+
+  console.log(req, "xxxxxxxxxxxxxxxxx");
+  Users.update({ isAdmin }, { where: { id: req.params.id }, returning: true })
+    .then(([rows, usuarios]) => {
+      res.send(usuarios);
+    })
+    .catch((error) => console.log("no se pudo editar"));
+});
+
 module.exports = userRouter;
