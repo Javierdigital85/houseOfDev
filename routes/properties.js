@@ -10,8 +10,6 @@ const storage = multer.diskStorage({});
 const upload = multer({ storage: storage }).single("img");
 
 propertyRouter.post("/register", upload, (req, res) => {
-  console.log(req.file);
-
   cloudinary.uploader
     .upload(req.file.path)
     .then((result) => {
@@ -63,7 +61,6 @@ propertyRouter.delete("/admin/:id", (req, res) => {
 propertyRouter.get("/alquiler", (req, res) => {
   const { ubicacion } = req.query;
   if (ubicacion === "all") {
-    console.log(ubicacion, "falseeeeeeeeee");
     Property.findAll({
       where: { onSale: false },
     })
@@ -118,7 +115,7 @@ propertyRouter.get("/:id", (req, res) => {
 
 propertyRouter.get("/", (req, res) => {
   const searchQuery = req.query;
-  console.log("SEARCH QUERY TE DIJE", req.query);
+
   Property.findAll({
     where: searchQuery,
   }).then((result) => res.status(200).send(result));
@@ -129,7 +126,7 @@ propertyRouter.put("/update/:id", (req, res) => {
     .then(([rows, propiedades]) => {
       res.send(propiedades[0]);
     })
-    .catch((error) => console.log("no se pudo editar"));
+    .catch((error) => "no se pudo editar");
 });
 
 module.exports = propertyRouter;
