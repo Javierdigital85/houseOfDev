@@ -121,12 +121,63 @@ propertyRouter.get("/", (req, res) => {
   }).then((result) => res.status(200).send(result));
 });
 
-propertyRouter.put("/update/:id", (req, res) => {
-  Property.update(req.body, { where: { id: req.params.id }, returning: true })
+// propertyRouter.put("/update/:id", (req, res) => {
+//   Property.update(req.body, { where: { id: req.params.id }, returning: true })
+//     .then(([rows, propiedades]) => {
+//       res.send(propiedades[0]);
+//     })
+//     .catch((error) => "no se pudo editar");
+// });
+
+propertyRouter.put("/update/:id", upload, (req, res) => {
+  const { id } = req.params;
+  console.log("ID de la propiedad a actualizar:", id);
+
+  // Verifica si req.file está definido
+  if (!req.file) {
+    return res
+      .status(400)
+      .send("No se ha proporcionado un archivo para cargar.");
+  }
+
+  cloudinary.uploader
+    .upload(req.file.path)
+    .then((result) => {
+      const {
+        province,
+        city,
+        address,
+        number,
+        onSale,
+        price,
+        squareMeters,
+        bedrooms,
+        bathrooms,
+      } = req.body;
+
+      return Property.update(
+        {
+          province,
+          city,
+          address,
+          number,
+          onSale,
+          price,
+          squareMeters,
+          bedrooms,
+          bathrooms,
+          img: result.secure_url,
+        },
+        {
+          where: { id: req.params.id },
+          returning: true,
+        }
+      );
+    })
     .then(([rows, propiedades]) => {
       res.send(propiedades[0]);
     })
-    .catch((error) => "no se pudo editar");
+    .catch((Error) => console.error(Error));
 });
 
 module.exports = propertyRouter;
